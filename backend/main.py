@@ -1,16 +1,19 @@
-# This is a sample Python script.
+import json
+from flask import Flask
+from geopy import distance
+import random
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+#database and environment variables
+from dbConn import *
 
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
+db = dbConn()
+conn = db.get_conn()
+app = Flask(__name__)
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+@app.route("/placeholder")
+def placeholder_function():
+    return os.getenv("FG_DB_NAME")
+
+if __name__ == "__main__":
+    app.run(use_reloader=True, host="127.0.1", port=3000)
