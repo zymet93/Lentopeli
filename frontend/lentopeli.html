@@ -1,10 +1,28 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
+<html>
+  <head>
+    <title>Flight Game</title>
+  </head>
+  <body>
+    <div style="float:right;">
+      <div>
+        Money: $<span id="player-money">0</span>
+      </div>
+      <div>
+        Profession: <progress id="player-profession" value="0" max="100"></progress>
+      </div>
+      <form>
+        <label for="country-select">Select a country:</label>
+        <select id="country-select" name="country">
+          <?php
+            // Code to fetch country data from database and create <option> tags goes here
+          ?>
+        </select>
+        <input type="submit" value="Fly" />
+      </form>
+    </div>
+    <div>
+      <!-- Add your map picture here -->
+    </div>
+  </body>
 </html>
