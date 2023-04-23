@@ -1,33 +1,41 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <link rel="stylesheet" href="leaflet.css" />
-    <script src="leaflet-src.js"></script>
-    <script src="leaflet-src.esm.js"></script>
+    <link rel="stylesheet" href="lentopeli.css">
     <script src="lentopeli.js" defer></script>
-
-
     <title>Flight Game</title>
   </head>
   <body>
-  <div id="map"></div>
+    <div id="top-bar">
+      <h1 class="title">Flight game</h1>
+      <div class="money">
+        <span id="player-money">Money: $0 </span>
+      </div>
+      <div class="profession">
+        Profession: <progress id="player-profession"></progress>
+      </div>
+      <div style="clear: both;"></div>
+    </div>
 
-    <div style="float:right;">
-      <div>
-        Money: $<span id="player-money">0</span>
-      </div>
-      <div>
-        Profession: <progress id="player-profession" value="0" max="100"></progress>
-      </div>
-      <form>
-        <label for="country-select">Select a country:</label>
-        <select id="country-select" name="country">
-          <?php
-            // Code to fetch country data from database and create <option> tags goes here
-          ?>
-        </select>
-        <input type="submit" value="Fly" />
-      </form>
+    <div id="map"></div>
+
+   <div class="fly-to-menu">
+  <div class="menu-header">Select a country</div>
+  <form class="country-select-form">
+    <select id="country-select" name="country">
+      <?php
+        // Code to fetch country data from database and create <option> tags goes here
+      ?>
+    </select>
+    <div class="nappula">
+    <input type="submit" value="Fly" />
+    </div>
+  </form>
+</div>
+
+
+</div>
+
     </div>
     <div>
       <!-- Add your map picture here -->

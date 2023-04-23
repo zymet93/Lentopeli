@@ -1,0 +1,114 @@
+#top-bar {
+  width: 100%;
+  background-color: black;
+  color: white;
+  padding-right: 70px;
+  padding-bottom: 1px;
+  padding-top: 1px;
+  margin-left: 0;
+  padding-left: 0;
+  border-left: none;
+   /* adjust this value based on the width of the .fly-to-menu element */
+}
+
+
+body {
+  overflow-x: hidden;
+
+  padding-top: 1px; /* adjust value to match height of fixed element */
+}
+
+.title {
+  text-align: center;
+    font-size: 40px;
+}
+
+.money {
+  padding-left: 25px;
+  font-size: 40px;
+  float: left;
+}
+
+.profession {
+  float: right;
+  padding-right: 35px;
+    font-size: 50px;
+}
+
+/* Progress bar styles */
+progress {
+    font-size: 40px;
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 10px;
+  border-radius: 5px;
+  background-color: lightgray;
+}
+
+progress::-webkit-progress-bar {
+  background-color: lightgray;
+  border-radius: 5px;
+}
+
+progress::-webkit-progress-value {
+  background-color: #0077ff;
+  border-radius: 5px;
+}
+span {
+    font-size: 40px;
+}
+
+label {
+  font-size: 25px;
+}
+select {
+  ;
+}
+.fly-to-menu {
+  float: right;
+    margin-top: 5px;
+    font-size: 25px;
+    border: 4px solid black;
+    padding: 25px;
+    background-color: ghostwhite;
+    border-radius: 10px;
+    height: 70vh;
+    width: 40vh;
+}
+
+.menu-header {
+  font-size: 45px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.country-select-form {
+  width: 100%;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: auto;
+}
+
+#country-select {
+  font-size: 18px;
+  padding: 5px;
+  margin-bottom: 10px;
+  width: 200px;
+}
+
+.nappula {
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 25px;
+  margin-bottom: 20px;
+}
+
+input[type="submit"] {
+  font-size: 50px;
+}
