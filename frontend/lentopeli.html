@@ -1,10 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<html>
+  <head>
+    <link rel="stylesheet" href="leaflet.css" />
+    <script src="leaflet-src.js"></script>
+    <script src="leaflet-src.esm.js"></script>
+    <script src="lentopeli.js" defer></script>
 
-</body>
+
+    <title>Flight Game</title>
+  </head>
+  <body>
+  <div id="map"></div>
+
+    <div style="float:right;">
+      <div>
+        Money: $<span id="player-money">0</span>
+      </div>
+      <div>
+        Profession: <progress id="player-profession" value="0" max="100"></progress>
+      </div>
+      <form>
+        <label for="country-select">Select a country:</label>
+        <select id="country-select" name="country">
+          <?php
+            // Code to fetch country data from database and create <option> tags goes here
+          ?>
+        </select>
+        <input type="submit" value="Fly" />
+      </form>
+    </div>
+    <div>
+      <!-- Add your map picture here -->
+    </div>
+  </body>
 </html>
