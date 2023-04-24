@@ -1,7 +1,10 @@
 import json
-from flask import Flask
+from flask import Flask, jsonify
 from geopy import distance
 from Player import Player
+from flask_cors import CORS
+
+
 
 #database and environment variables
 from dbConn import *
@@ -11,8 +14,8 @@ connection = db.get_conn()
 
 #various functions
 from functions import *
-
 app = Flask(__name__)
+CORS(app)
 players = []
 
 
@@ -35,5 +38,24 @@ def creategame(player, profession):
             }
     else: return "error"
 
-if __name__ == "__main__":
+# Endpoint to return airport data
+@app.route('/airports')
+def airports():
+    db = dbConn()
+    conn = db.get_conn()
+    cursor = conn.cursor(dictionary=True)
+    sql = """SELECT iso_country, ident, name, type, latitude_deg, longitude_deg
+             FROM airport"""
+    cursor.execute(sql)
+    result = cursor.fetchall()
+    cursor.close()
+    conn.close()
+    return jsonify(result)
+
+if __name__ == '__main__':
     app.run(use_reloader=True, host="127.0.0.1", port=3000)
+
+
+
+
+
