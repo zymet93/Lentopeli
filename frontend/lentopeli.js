@@ -31,3 +31,32 @@ var circle = L.circle([51.508, -0.11], {
 }).addTo(map);
 
 circle.bindPopup("I am a circle.");
+
+const countrySelect = document.getElementById('country-select');
+
+// Fetch airport data from backend API
+fetch('/airports')
+  .then(response => response.json())
+  .then(data => {
+    // Build country options list
+    const countries = {};
+    data.forEach(airport => {
+      if (!(airport.iso_country in countries)) {
+        countries[airport.iso_country] = true;
+        const option = document.createElement('option');
+        option.text = airport.iso_country;
+        option.value = airport.iso_country;
+        countrySelect.add(option);
+      }
+    });
+    // Remove the "loading countries" option
+    countrySelect.remove(0);
+  });
+
+async function getmyairports() {
+    const val = await fetch("http://127.0.0.1:3000/airports");
+    const jsonData = await val.json();
+    console.log(jsonData.value);
+}
+
+getmyairports();
