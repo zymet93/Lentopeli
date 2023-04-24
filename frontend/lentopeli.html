@@ -2,10 +2,16 @@
   <head>
     <link rel="stylesheet" href="lentopeli.css">
     <script src="lentopeli.js" defer></script>
+     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+     integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+     crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+     integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+     crossorigin=""></script>
     <title>Flight Game</title>
   </head>
   <body>
-    <div id="top-bar">
+    <div class="top-bar">
       <h1 class="title">Flight game</h1>
       <div class="money">
         <span id="player-money">Money: $0 </span>
@@ -22,10 +28,9 @@
   <div class="menu-header">Select a country</div>
   <form class="country-select-form">
     <select id="country-select" name="country">
-      <?php
-        // Code to fetch country data from database and create <option> tags goes here
-      ?>
+
     </select>
+
     <div class="nappula">
     <input type="submit" value="Fly" />
     </div>
