@@ -1,25 +1,33 @@
-const map = L.map('map').setView([60.23, 24.74], 13);
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+let name = prompt("Please enter your name:");
+let job = prompt("Please enter your job:");
+
+
+fetch('/search?name=' + name + '&job=' + job)
+  .then(response => {
+    // Handle the response from the server
+  })
+  .catch(error => {
+    // Handle any errors that occurred during the request
+  });
+
+
+var map = L.map('map').setView([51.505, -0.09], 13);
+
+L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map);
 
-const airportMarkers = L.featureGroup().addTo(map);
+L.marker([51.5, -0.09]).addTo(map)
+    .bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
+    .openPopup();
 
-const searchForm = document.querySelector('#single');
-const input = document.querySelector('input[name=icao]');
-searchForm.addEventListener('submit', async function(evt) {
-  evt.preventDefault();
-  const icao = input.value;
-  const response = await fetch('http://127.0.0.1:3000/airport/' + icao);
-  const airport = await response.json();
-  // remove possible other markers
-  airportMarkers.clearLayers();
-  // add marker
-  const marker = L.marker([airport.latitude_deg, airport.longitude_deg]).
-      addTo(map).
-      bindPopup(airport.name).
-      openPopup();
-  airportMarkers.addLayer(marker);
-  // pan map to selected airport
-  map.flyTo([airport.latitude_deg, airport.longitude_deg]);
-});
+var marker = L.marker([51.5, -0.09]).addTo(map);
+var circle = L.circle([51.508, -0.11], {
+    color: 'red',
+    fillColor: '#f03',
+    fillOpacity: 0.5,
+    radius: 500
+}).addTo(map);
+
+marker.bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup();
+circle.bindPopup("I am a circle.");
