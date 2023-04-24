@@ -4,8 +4,6 @@ from geopy import distance
 from Player import Player
 from flask_cors import CORS
 
-
-
 #database and environment variables
 from dbConn import *
 
@@ -14,14 +12,17 @@ connection = db.get_conn()
 
 #various functions
 from functions import *
+
 app = Flask(__name__)
 CORS(app)
+
 players = []
 
-
-@app.route("/creategame/<player>/<profession>")
+@app.route("/player/create/<player>/<profession>")
 def creategame(player, profession):
-    if profession == "Rakentaja" or profession == "Koodaaja" or profession == "Kuski":
+    #placeholder
+    if True:
+    #if profession == "Rakentaja" or profession == "Koodaaja" or profession == "Kuski":
         start_money = 10000
         start_airport = "EFHK"
         all_airports = get_airports(connection)
@@ -33,10 +34,31 @@ def creategame(player, profession):
             "playersIndex": playersIndex,
             "playerID": players[playersIndex].id,
             "playerName": players[playersIndex].name,
+            "playerTime": players[playersIndex].time,
+            "playerMoney": players[playersIndex].money,
             "playerLocation": players[playersIndex].location,
-            "playerProfession": players[playersIndex].profession
+            "playerProfession": players[playersIndex].profession,
+            "playerCanShuffleWork": players[playersIndex].canShuffleWork,
+            "playerCanWorkAmount": players[playersIndex].canWorkAmt
             }
     else: return "error"
+
+#get player data
+@app.route("/player/<playeridx>/get")
+def get_player(playeridx):
+    #add check for id?
+    playeridx = int(playeridx)
+    return {
+        "playersIndex": playeridx,
+        "playerID": players[playeridx].id,
+        "playerName": players[playeridx].name,
+        "playerTime": players[playeridx].time,
+        "playerMoney": players[playeridx].money,
+        "playerLocation": players[playeridx].location,
+        "playerProfession": players[playeridx].profession,
+        "playerCanShuffleWork": players[playeridx].canShuffleWork,
+        "playerCanWorkAmount": players[playeridx].canWorkAmt
+    }
 
 # Endpoint to return airport data
 @app.route('/airports')
@@ -52,10 +74,7 @@ def airports():
     conn.close()
     return jsonify(result)
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     app.run(use_reloader=True, host="127.0.0.1", port=3000)
-
-
-
 
 
