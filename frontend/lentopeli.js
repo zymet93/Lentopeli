@@ -35,7 +35,7 @@ circle.bindPopup("I am a circle.");
 const countrySelect = document.getElementById('country-select');
 
 // Fetch airport data from backend API
-fetch('/airports')
+/*fetch('/airports')
   .then(response => response.json())
   .then(data => {
     // Build country options list
@@ -51,12 +51,12 @@ fetch('/airports')
     });
     // Remove the "loading countries" option
     countrySelect.remove(0);
-  });
+  });*/
 
 async function getmyairports() {
     const val = await fetch("http://127.0.0.1:3000/airports");
     const jsonData = await val.json();
-    console.log(jsonData.value);
+    console.log(jsonData);
 }
 
 getmyairports();
