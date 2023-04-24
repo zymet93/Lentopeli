@@ -2,14 +2,7 @@ let name = prompt("Please enter your name:");
 let job = prompt("Please enter your job:");
 
 
-function getAirports(connection) {
-    const sql = "SELECT iso_country, ident, name, type, latitude_deg, longitude_deg\n" +
-        "             FROM airport";
-    const cursor = connection.cursor({dictionary: true});
-    cursor.execute(sql);
-    const result = cursor.fetchall();
-    return result;
-}
+
 
 
 // Create an array of addresses
