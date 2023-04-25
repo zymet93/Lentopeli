@@ -1,4 +1,3 @@
-import json
 from flask import Flask, jsonify
 from geopy import distance
 from Player import Player
@@ -26,6 +25,8 @@ def creategame(player, profession):
         start_money = 10000
         start_airport = "EFHK"
         all_airports = get_airports(connection)
+
+        start_money = start_money + checkmoonphase()
 
         players.append(Player(create_game(connection, player, start_airport, start_money, all_airports, profession), start_airport, 12, start_money, all_airports, profession, player))
         playersIndex = len(players)-1

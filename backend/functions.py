@@ -1,4 +1,7 @@
 import random
+import json
+import requests
+from datetime import date
 
 def execute_sql(connection, sql):
     # print(f"execute: [{sql}]")
@@ -47,3 +50,17 @@ def create_game(connection, p_name, cur_airport, start_money, a_ports, professio
         cursor.execute(sql, (g_id, g_ports[i]['ident'], goal_id))
 
     return g_id
+
+def checkmoonphase():
+    response = requests.get("https://users.metropolia.fi/~royk/fullmoon.json")
+    if response.status_code == 200:
+        y = str(date.today().strftime("%Y"))
+        m = str(date.today().strftime("%m"))
+        d = str(date.today().strftime("%d"))
+        if (len(response.json()["fullmoon"][y][m]) == 1 and response.json()["fullmoon"][y][m][0] == d):
+            return 10000
+        elif (len(response.json()["fullmoon"][y][m]) > 1):
+            for x in response.json()["fullmoon"][y][m]:
+                if x == d:
+                    return 10000
+    return 0
