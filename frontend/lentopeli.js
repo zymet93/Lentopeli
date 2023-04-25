@@ -20,8 +20,19 @@ async function addMarkers() {
   for (let i = 0; i < jsonData.length; i++) {
     const marker = L.marker([jsonData[i].latitude_deg, jsonData[i].longitude_deg]).addTo(map);
     marker.bindPopup(`${jsonData[i].name} (${jsonData[i].ident}) - ${jsonData[i].iso_country}`);
+    marker.on('click', function() {
+      const answer = confirm(`Do you want to fly to ${jsonData[i].name}?`);
+      if (answer) {
+        const selectedOption = countrySelect.querySelector(`option[value='${jsonData[i].ident}']`);
+        if (selectedOption) {
+          selectedOption.selected = true;
+        }
+        document.getElementById('fly-button').disabled = false;
+      }
+    });
   }
 }
+
 
 // Call the function to add markers to the map
 addMarkers();
