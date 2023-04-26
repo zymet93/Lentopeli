@@ -33,15 +33,33 @@ body {
     font-size: 40px;
 }
 
+#topname {
+    width: 22%;
+    padding: 1%;
+    margin: 0 0.5% 0 0.5%;
+    float: left;
+}
+
+#toplocation {
+    width: 22%;
+    padding: 1%;
+    margin: 0 0.5% 0 0.5%;
+    float: left;
+}
+
 .money {
-    padding-left: 25px;
+    width: 22%;
     font-size: 40px;
+    padding: 1%;
+    margin: 0 0.5% 0 0.5%;
     float: left;
 }
 
 .profession {
-    float: right;
-    padding-right: 35px;
+    float: left;
+    width: 22%;
+    padding: 1%;
+    margin: 0 0.5% 0 0.5%;
     font-size: 50px;
 }
 

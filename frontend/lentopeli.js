@@ -1,8 +1,59 @@
-let name = prompt("Please enter your name:");
-let job = prompt("Please enter your job:");
+//let name = prompt("Please enter your name:");
+//let job = prompt("Please enter your job:");
+
+const name = "test";
+const job = "Kuski";
 
 
+async function getPlayer(name, job) {
+    let val = await fetch("http://127.0.0.1:3000/player/create/" + name + "/" + job).then(function(res) {
+        return res.json();
+    });
+    return val;
+}
 
+async function getPlayerUpdate(index) {
+    let val = await fetch("http://127.0.0.1:3000/player/" + index + "/get").then(function(res) {
+        return res.json();
+    });
+    return val;
+}
+
+if (document.cookie.split(";").some((item) => item.trim().startsWith("fgplayercookie="))) {
+    const cookieValue = document.cookie
+          .split("; ")
+          .find((row) => row.startsWith("fgplayercookie="))?.split("=")[1];
+    console.log(cookieValue);
+    getPlayerUpdate(cookieValue).then(function(res) {
+        console.log(res);
+
+        let select = document.getElementById("player-topname");
+        select.innerHTML = res.playerName;
+
+        select = document.getElementById("player-toplocation");
+        select.innerHTML = res.playerLocation;
+
+        select = document.getElementById("player-money");
+        select.innerHTML = res.playerMoney + "€";
+
+        select = document.getElementsByClassName("profession")[0];
+        select.innerHTML = 'Profession: ' + res.playerProfession + '<progress id="player-profession"></progress>';
+    });
+} else {
+    getPlayer(name, job).then(function(res) {
+        console.log(res);
+        document.cookie = "fgplayercookie=" + res.playersIndex;
+
+        let select = document.getElementById("player-topname");
+        select.innerHTML = res.playerName;
+
+        select = document.getElementById("player-toplocation");
+        select.innerHTML = res.playerLocation;
+
+        select = document.getElementById("player-money");
+        select.innerHTML = res.playerMoney;
+    });
+}
 
 // Create a Leaflet map and set the initial view to somewhere in Europe
 var map = L.map('map').setView([48.8566, 2.3522], 5);
