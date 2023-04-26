@@ -34,7 +34,7 @@ if (document.cookie.split(";").some((item) => item.trim().startsWith("fgplayerco
         select.innerHTML = res.playerLocation;
 
         select = document.getElementById("player-money");
-        select.innerHTML = res.playerMoney + "€";
+        select.innerHTML = res.playerMoney;
 
         select = document.getElementsByClassName("profession")[0];
         select.innerHTML = 'Profession: ' + res.playerProfession + '<progress id="player-profession"></progress>';
@@ -52,7 +52,17 @@ if (document.cookie.split(";").some((item) => item.trim().startsWith("fgplayerco
 
         select = document.getElementById("player-money");
         select.innerHTML = res.playerMoney;
+
+        select = document.getElementsByClassName("profession")[0];
+        select.innerHTML = 'Profession: ' + res.playerProfession + '<progress id="player-profession"></progress>';
     });
+}
+
+function flytobotan(target) {
+    const cookieValue = document.cookie
+          .split("; ")
+          .find((row) => row.startsWith("fgplayercookie="))?.split("=")[1];
+    fetch("http://127.0.0.1:3000/fly/" + cookieValue + "/" + target).then(function(){window.location.reload(false)});
 }
 
 // Create a Leaflet map and set the initial view to somewhere in Europe
@@ -77,6 +87,7 @@ async function addMarkers() {
         const selectedOption = countrySelect.querySelector(`option[value='${jsonData[i].ident}']`);
         if (selectedOption) {
           selectedOption.selected = true;
+          flytobotan(selectedOption.value);
         }
         document.getElementById('fly-button').disabled = false;
       }
@@ -128,9 +139,15 @@ async function getmyairports() {
         option.text = `${jsonData[i].name} (${jsonData[i].ident}) - ${jsonData[i].iso_country}`;
         select.add(option);
     }
+    document.getElementById("country-select").value=document.getElementById("player-toplocation").innerHTML;
 }
-
 
 // Call the function to populate the select element
 getmyairports();
 
+const flyform = document.querySelector(".country-select-form");
+flyform.addEventListener("submit", async function(e) {
+    e.preventDefault();
+    const flyselect = document.getElementById("country-select");
+    flytobotan(flyselect.value);
+});
