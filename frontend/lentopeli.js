@@ -19,6 +19,10 @@ async function getPlayerUpdate(index) {
     return val;
 }
 
+function resetcookie() {
+    document.cookie = "fgplayercookie=;expires=Thu, 01 Jan 1970 00:00:01 GMT";
+}
+
 if (document.cookie.split(";").some((item) => item.trim().startsWith("fgplayercookie="))) {
     const cookieValue = document.cookie
           .split("; ")
