@@ -1,6 +1,4 @@
-import json
 from flask import Flask, jsonify
-from geopy import distance
 from Player import Player
 from flask_cors import CORS
 
@@ -27,7 +25,9 @@ def creategame(player, profession):
         start_airport = "EFHK"
         all_airports = get_airports(connection)
 
-        players.append(Player(create_game(connection, player, start_airport, start_money, all_airports, profession), start_airport, 12, start_money, all_airports, profession, player))
+        start_money = start_money + checkMoonPhase()
+
+        players.append(Player(create_game(connection, player, start_airport, start_money, all_airports, profession), start_airport, 24, start_money, all_airports, profession, player))
         playersIndex = len(players)-1
 
         return {
@@ -41,7 +41,7 @@ def creategame(player, profession):
             "playerCanShuffleWork": players[playersIndex].canShuffleWork,
             "playerCanWorkAmount": players[playersIndex].canWorkAmt
             }
-    else: return "error"
+    else: return "failure"
 
 #get player data
 @app.route("/player/<playeridx>/get")
@@ -73,6 +73,25 @@ def airports():
     cursor.close()
     conn.close()
     return jsonify(result)
+
+@app.route('/airports/<playeridx>')
+def airportsvisitable(playeridx):
+    playeridx = int(playeridx)
+    return jsonify(get_airports_player(connection, players[playeridx].id))
+
+@app.route('/fly/<playeridx>/<airport>')
+def flyto(playeridx, airport):
+    playeridx = int(playeridx)
+    cost = calculateFlyCost(connection, players[playeridx].location, airport)
+    if (players[playeridx].time > 0 and players[playeridx].money >= cost):
+        players[playeridx].location = airport
+        players[playeridx].money -= cost
+        players[playeridx].time -= 1
+
+        players[playeridx].resetWork()
+        visited_country(connection, get_airport_info(connection, airport)["iso_country"], players[playeridx].id)
+        return "success"
+    return "failure"
 
 if __name__ == "__main__":
     app.run(use_reloader=True, host="127.0.0.1", port=3000)
