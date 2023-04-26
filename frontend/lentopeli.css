@@ -142,3 +142,11 @@ select {;
 input[type="submit"] {
     font-size: 50px;
 }
+button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 18px;
+  padding: 10px 20px;
+}
+
