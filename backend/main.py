@@ -77,7 +77,20 @@ def airports():
 @app.route('/airports/<playeridx>')
 def airportsvisitable(playeridx):
     playeridx = int(playeridx)
-    return jsonify(get_airports_player(connection, players[playeridx].id))
+    player = players[playeridx]
+    airports = get_airports_player(connection, player.id)
+    cost_multiplier = 1.5  # adjust this as needed
+
+    for airport in airports:
+        airport_id = airport['ident']
+        fly_cost = calculateFlyCost(connection, player.location, airport_id, cost_multiplier)
+        airport['cost'] = fly_cost
+
+
+    response = jsonify(airports)
+    print(response)
+    return response
+
 
 @app.route('/fly/<playeridx>/<airport>')
 def flyto(playeridx, airport):
@@ -93,7 +106,8 @@ def flyto(playeridx, airport):
         return "success"
     return "failure"
 
+
+
 if __name__ == "__main__":
     app.run(use_reloader=True, host="127.0.0.1", port=3000)
-
 
