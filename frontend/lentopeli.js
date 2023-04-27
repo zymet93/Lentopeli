@@ -1,10 +1,6 @@
 //let name = prompt("Please enter your name:");
 //let job = prompt("Please enter your job:");
 
-const name = "test";
-const job = "Kuski";
-
-
 async function getPlayer(name, job) {
     let val = await fetch("http://127.0.0.1:3000/player/create/" + name + "/" + job).then(function(res) {
         return res.json();
@@ -24,6 +20,7 @@ function resetcookie() {
 }
 
 if (document.cookie.split(";").some((item) => item.trim().startsWith("fgplayercookie="))) {
+    document.getElementById("newdiv").classList.add("hidden");
     const cookieValue = document.cookie
           .split("; ")
           .find((row) => row.startsWith("fgplayercookie="))?.split("=")[1];
@@ -44,6 +41,15 @@ if (document.cookie.split(";").some((item) => item.trim().startsWith("fgplayerco
         select.innerHTML = 'Profession: ' + res.playerProfession + '<progress id="player-profession"></progress>';
     });
 } else {
+    document.getElementById("maindiv").classList.add("hidden");
+}
+
+const plyform = document.querySelector("#playercreator");
+plyform.addEventListener("submit", async function(e) {
+    e.preventDefault();
+    const name = document.getElementById("nimimerkkikentta").value;
+    const job = document.getElementById("jobselect").value;
+
     getPlayer(name, job).then(function(res) {
         console.log(res);
         document.cookie = "fgplayercookie=" + res.playersIndex;
@@ -59,8 +65,10 @@ if (document.cookie.split(";").some((item) => item.trim().startsWith("fgplayerco
 
         select = document.getElementsByClassName("profession")[0];
         select.innerHTML = 'Profession: ' + res.playerProfession + '<progress id="player-profession"></progress>';
+    }).then(function() {
+        window.location.reload(false)
     });
-}
+});
 
 function flytobotan(target) {
     const cookieValue = document.cookie
