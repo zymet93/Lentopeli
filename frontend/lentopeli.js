@@ -87,7 +87,10 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 
 // Function to add markers from API data to the map
 async function addMarkers() {
-  const val = await fetch("http://127.0.0.1:3000/airports");
+  let mycookieValue = document.cookie
+        .split("; ")
+        .find((row) => row.startsWith("fgplayercookie="))?.split("=")[1];
+  const val = await fetch("http://127.0.0.1:3000/airports/" + mycookieValue);
   const jsonData = await val.json();
 
   for (let i = 0; i < jsonData.length; i++) {
@@ -117,7 +120,10 @@ const countrySelect = document.getElementById('country-select');
 
 
 async function getmyairports() {
-    const val = await fetch("http://127.0.0.1:3000/airports");
+    let mycookieValue = document.cookie
+          .split("; ")
+          .find((row) => row.startsWith("fgplayercookie="))?.split("=")[1];
+    const val = await fetch("http://127.0.0.1:3000/airports/" + mycookieValue);
     const jsonData = await val.json();
     const select = document.getElementById("country-select");
     for (let i = 0; i < jsonData.length; i++) {
@@ -154,7 +160,3 @@ function createNewGame() {
 
     });
 }
-fetch("http://127.0.0.1:3000/airports/0")
-  .then(response => response.json())
-  .then(data => console.log(data))
-  .catch(error => console.error(error));
