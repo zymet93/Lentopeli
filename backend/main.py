@@ -98,8 +98,14 @@ def airportsvisitable(playeridx):
 @app.route('/fly/<playeridx>/<airport>')
 def flyto(playeridx, airport):
     playeridx = int(playeridx)
+
+    go = 0
+    for x in get_airports_player(connection, players[playeridx].id):
+        if airport == x["ident"]:
+            go = 1
+
     cost = calculateFlyCost(connection, players[playeridx].location, airport)
-    if (players[playeridx].time > 0 and players[playeridx].money >= cost):
+    if (players[playeridx].time > 0 and players[playeridx].money >= cost and go == 1):
         players[playeridx].location = airport
         players[playeridx].money -= cost
         players[playeridx].time -= 1
