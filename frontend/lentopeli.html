@@ -47,14 +47,27 @@
         <form class="country-select-form">
           <select id="country-select" name="country">
             <?php
-             // Code to fetch country data from database and create <option> tags goes here
+        // Code to fetch country data from database and create <option> tags goes here
             ?>
           </select>
           <div class="nappula">
-            <input type="submit" value="Fly" />
+            <input type="submit" value="Fly"/>
           </div>
         </form>
+        <div class="menu-header">
+          <form id="work-form">
+            <label class="menu-header" for="work-select">Select work:</label>
+            <select id="work-select" name="work">
+
+            </select>
+            <div class="nappula">
+              <input type="submit" value="Work"/>
+            </div>
+          </form>
+          <script src="work.js"></script>
+        </div>
       </div>
+
       <button onclick="createNewGame()">New Game</button>
 
 
@@ -65,3 +78,4 @@
     </div>
   </body>
 </html>
+
