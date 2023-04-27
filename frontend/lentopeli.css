@@ -1,3 +1,16 @@
+#newdiv {
+    margin: auto;
+}
+
+.hidden {
+    display: none;
+}
+
+.rlabel {
+    display: inline-block;
+    width: 250px;
+}
+
 .top-bar {
     width: 102%;
     background-color: black;
