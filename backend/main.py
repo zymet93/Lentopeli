@@ -30,6 +30,8 @@ def creategame(player, profession):
         players.append(Player(create_game(connection, player, start_airport, start_money, all_airports, profession), start_airport, 24, start_money, all_airports, profession, player))
         playersIndex = len(players)-1
 
+        visited_country(connection, get_airport_info(connection, start_airport)["iso_country"], players[playersIndex].id)
+
         return {
             "playersIndex": playersIndex,
             "playerID": players[playersIndex].id,
@@ -77,6 +79,7 @@ def airports():
 @app.route('/airports/<playeridx>')
 def airportsvisitable(playeridx):
     playeridx = int(playeridx)
+    print(playeridx)
     player = players[playeridx]
     airports = get_airports_player(connection, player.id)
     cost_multiplier = 1.5  # adjust this as needed

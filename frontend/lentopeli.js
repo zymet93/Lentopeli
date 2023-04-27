@@ -90,7 +90,7 @@ async function addMarkers() {
   let mycookieValue = document.cookie
         .split("; ")
         .find((row) => row.startsWith("fgplayercookie="))?.split("=")[1];
-  const val = await fetch("http://127.0.0.1:3000/airports/" + mycookieValue);
+  const val = await fetch("http://127.0.0.1:3000/airports");
   const jsonData = await val.json();
 
   for (let i = 0; i < jsonData.length; i++) {
@@ -117,13 +117,11 @@ addMarkers();
 
 const countrySelect = document.getElementById('country-select');
 
-
-
 async function getmyairports() {
     let mycookieValue = document.cookie
           .split("; ")
           .find((row) => row.startsWith("fgplayercookie="))?.split("=")[1];
-    const val = await fetch("http://127.0.0.1:3000/airports/" + mycookieValue);
+    const val = await fetch("http://127.0.0.1:3000/airports");
     const jsonData = await val.json();
     const select = document.getElementById("country-select");
     for (let i = 0; i < jsonData.length; i++) {
@@ -160,3 +158,10 @@ function createNewGame() {
 
     });
 }
+let mycookieValue = document.cookie
+    .split("; ")
+    .find((row) => row.startsWith("fgplayercookie="))?.split("=")[1];
+fetch("http://127.0.0.1:3000/airports")
+  .then(response => response.json())
+  .then(data => console.log(data))
+  .catch(error => console.error(error));
