@@ -1,7 +1,7 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, render_template, url_for, redirect
 from Player import Player
 from flask_cors import CORS
-
+from flask import request
 #database and environment variables
 from dbConn import *
 
@@ -115,8 +115,27 @@ def flyto(playeridx, airport):
         return "success"
     return "failure"
 
+@app.route('/work/<playeridx>/<job>')
+def work(playeridx, job):
+    playeridx = int(playeridx)
+    if (players[playeridx].time > 0):
+
+        salary = 0
+        rakentajapalkka = 1000
+        kuskipalkka = 2000
+        koodaripalkka = 3000
+
+        if job == "Rakentaja":
+            salary = rakentajapalkka + rakentajapalkka * (2*(job == players[playeridx].profession))
+        if job == "Kuski":
+            salary = kuskipalkka + kuskipalkka * (2*(job == players[playeridx].profession))
+        if job == "Koodari":
+            salary = koodaripalkka + koodaripalkka * (2*(job == players[playeridx].profession))
+
+        players[playeridx].money += salary
+        return "success"
+
 
 
 if __name__ == "__main__":
     app.run(use_reloader=True, host="127.0.0.1", port=3000)
-
