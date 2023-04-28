@@ -27,6 +27,13 @@ function hasWorkedInCountry(country) {
   return workedCountries.includes(country);
 }
 
+function doworkin(target) {
+    const cookieValue = document.cookie
+          .split("; ")
+          .find((row) => row.startsWith("fgplayercookie="))?.split("=")[1];
+    fetch("http://127.0.0.1:3000/work/" + cookieValue + "/" + target).then(function(){window.location.reload(false)});
+}
+
 // Handle the form submission
 document.getElementById("work-form").addEventListener("submit", function(event) {
   event.preventDefault(); // prevent the default form submission
@@ -36,13 +43,19 @@ document.getElementById("work-form").addEventListener("submit", function(event) 
   var selectedCountry = countrySelect.value;
 
   // Check if the player has already worked in this country
-  if (hasWorkedInCountry(selectedCountry)) {
+  if (hasWorkedInCountry(selectedCountry) || document.cookie.split(";").some((item) => item.trim().startsWith("fgworkcookie="))) {
     alert("You've already worked in " + selectedCountry);
     return;
   }
 
+    // Get the selected work option
+    var selectedWorkOption = workSelect.options[workSelect.selectedIndex].value;
+
+    doworkin(selectedWorkOption);
+
   // Add the country to the workedCountries array
   workedCountries.push(selectedCountry);
+  document.cookie = "fgworkcookie=True";
 
   // Generate new work options
   var numWorkOptions = Math.floor(Math.random() * 3) + 1; // generate a random number between 1 and 3
@@ -55,16 +68,6 @@ document.getElementById("work-form").addEventListener("submit", function(event) 
   }
 });
 
-function doworkin(target) {
-    const cookieValue = document.cookie
-          .split("; ")
-          .find((row) => row.startsWith("fgplayercookie="))?.split("=")[1];
-    fetch("http://127.0.0.1:3000/work/" + cookieValue + "/" + target).then(function(){window.location.reload(false)});
-}
 // Add a click event listener to the work nappula
 workNappula.addEventListener('click', function() {
-    // Get the selected work option
-    var selectedWorkOption = workSelect.options[workSelect.selectedIndex].value;
-
-    doworkin(selectedWorkOption);
 });
