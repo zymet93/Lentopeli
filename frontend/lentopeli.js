@@ -134,10 +134,10 @@ if (document.cookie.split(";").some((item) => item.trim().startsWith("fgplayerco
             .split("; ")
             .find((row) => row.startsWith("fgplayercookie="))?.split("=")[1];
 
-        fetch("http://127.0.0.1:3000/airports/" + mycookieValue)
+      /*  fetch("http://127.0.0.1:3000/airports/" + mycookieValue)
             .then(response => response.json())
             .then(data => console.log(data))
-            .catch(error => console.error(error));
+            .catch(error => console.error(error)); */
 
     });
 } else {
