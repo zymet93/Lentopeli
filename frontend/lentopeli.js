@@ -24,8 +24,18 @@ function flytobotan(target) {
     const cookieValue = document.cookie
           .split("; ")
           .find((row) => row.startsWith("fgplayercookie="))?.split("=")[1];
-    document.cookie = "fgworkcookie=;expires=Thu, 01 Jan 1970 00:00:01 GMT";
-    fetch("http://127.0.0.1:3000/fly/" + cookieValue + "/" + target).then(function(){window.location.reload(false)});
+    fetch("http://127.0.0.1:3000/fly/" + cookieValue + "/" + target)
+            .then(response => response.text())
+            .then(function(data) {
+                if (data == "success") {
+                    document.cookie = "fgworkcookie=;expires=Thu, 01 Jan 1970 00:00:01 GMT";
+                    window.location.reload(false);
+                }
+                else if (data == "failure"){
+                    alert("Couldn't fly!");
+                    window.location.reload(false);
+                }
+            });
 }
 
 // Function to add markers from API data to the map
