@@ -1,6 +1,20 @@
 //let name = prompt("Please enter your name:");
 //let job = prompt("Please enter your job:");
 
+function endGame() {
+    document.getElementById("newdiv").classList.add("hidden");
+    document.getElementById("maindiv").classList.add("hidden");
+    document.getElementById("highscorediv").classList.remove("hidden");
+
+    let select;
+
+    select = document.getElementById("highscorename");
+    select.innerHTML = "Name: <b>" + document.getElementById("player-topname").innerHTML + "</b>";
+
+    select = document.getElementById("highscoreamount");
+    select.innerHTML = "<b>" + document.getElementById("player-money").innerHTML + "</b>";
+}
+
 async function getPlayer(name, job) {
     let val = await fetch("http://127.0.0.1:3000/player/create/" + name + "/" + job).then(function(res) {
         return res.json();
@@ -136,6 +150,16 @@ if (document.cookie.split(";").some((item) => item.trim().startsWith("fgplayerco
         if (res.playerGoal < 0) {
             alert("You were robbed!")
         }
+
+        if (res.playerTime <= 0 || res.playerMoney <= 0) {
+            if (res.playerTime <= 0) {
+                alert("Time's up!");
+            } else {
+                alert("You ran out of money!");
+            }
+            endGame();
+        }
+
     }).then(function() {
 
         // Call the function to add markers to the map
@@ -191,5 +215,15 @@ plyform.addEventListener("submit", async function(e) {
         select.innerHTML = 'Profession: ' + res.playerProfession;
     }).then(function() {
         window.location.reload(false)
+    });
+});
+
+const hsform = document.querySelector("#scoreform");
+hsform.addEventListener("submit", async function(e) {
+    e.preventDefault();
+
+    fetch("http://127.0.0.1:3000/highscore/add/" + document.cookie.split("; ").find((row) => row.startsWith("fgplayercookie="))?.split("=")[1]).then(function() {
+        alert("Highscore added!");
+        window.location = "highscores.html";
     });
 });

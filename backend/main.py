@@ -140,7 +140,23 @@ def work(playeridx, job):
         players[playeridx].money += salary
         players[playeridx].time -= 1
         return "success"
+    return "failure"
 
+
+@app.route('/highscore/add/<playeridx>')
+def addtohs(playeridx):
+    playeridx = int(playeridx)
+    sql = 'update player set currency=' + str(players[playeridx].money) + ' where id=' + str(players[playeridx].id)
+    execute_sql(connection, sql)
+
+    sql = "insert into highscore (player) values (" + str(players[playeridx].id) + ")"
+    execute_sql(connection, sql)
+    return "success, probably"
+
+@app.route('/highscore/get')
+def geths():
+    sql = "select player.p_name, player.currency from player, highscore where player.id = highscore.player order by player.currency desc limit 5"
+    return jsonify(execute_sql(connection, sql))
 
 
 if __name__ == "__main__":

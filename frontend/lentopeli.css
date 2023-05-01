@@ -15,6 +15,14 @@ body {
     display: none;
 }
 
+#hsdiv {
+    margin: 5%;
+}
+
+#topfive li {
+    list-style: none;
+}
+
 .rlabel {
     display: inline-block;
     width: 250px;

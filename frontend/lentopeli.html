@@ -22,6 +22,18 @@
         <input type="submit" id="playersubmit" value="Start game" style="font-size: 1.5em">
     </form>
 </div>
+<div id="highscorediv" class="hidden">
+  <h2 style="padding-left:5%">Game over</h2>
+  <form id="scoreform" style="padding-left:5%; width:500px;">
+    <p id="highscorename">Name: <b>Example</b></p>
+    <p id="highscoreamount">Money: <b>1000</b></p>
+    <br>
+    <p>Submit highscore?</p>
+
+    <button onclick="createNewGame()">New Game</button>
+    <input type="submit" id="highscoresubmit" value="Submit" style="font-size: 1.5em">
+  </form>
+</div>
 <div id="maindiv">
     <div class="top-bar">
         <h1 class="title">Flight game</h1>
