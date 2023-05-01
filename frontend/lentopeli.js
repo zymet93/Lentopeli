@@ -54,7 +54,6 @@ function flytobotan(target) {
 
 // Function to add markers from API data to the map
 async function addMarkers() {
-
     // Create a Leaflet map and set the initial view to somewhere in Europe
     var map = L.map('map').setView([48.8566, 2.3522], 5);
 
@@ -63,12 +62,19 @@ async function addMarkers() {
         attribution: 'Map data &copy; OpenStreetMap contributors'
     }).addTo(map);
 
-
     let mycookieValue = document.cookie
         .split("; ")
         .find((row) => row.startsWith("fgplayercookie="))?.split("=")[1];
     const val = await fetch("http://127.0.0.1:3000/airports/" + mycookieValue);
     const jsonData = await val.json();
+
+    // Get the player's current location
+    const locationVal = await fetch(`http://127.0.0.1:3000/player/${mycookieValue}/location`);
+    const locationData = await locationVal.json();
+
+    // Create a red popup marker at the player's location
+    const playerMarker = L.marker([locationData.latitude, locationData.longitude], {icon: L.icon({iconUrl: 'http://leafletjs.com/examples/custom-icons/leaf-red.png', iconSize: [38, 95]})}).addTo(map);
+    playerMarker.bindPopup('Current Location').openPopup();
 
     const countrySelect = document.getElementById('country-select');
     for (let i = 0; i < jsonData.length; i++) {
