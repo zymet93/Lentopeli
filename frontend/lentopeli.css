@@ -8,6 +8,7 @@ body {
 
 #newdiv {
     margin: auto;
+    position: fixed;
 }
 
 .hidden {
@@ -30,21 +31,12 @@ body {
     margin-left: -8px;*/
 
 
-
 }
-#map {
-    height: 100%;
-    width: 50vw;
-    margin-top: 5%;
-    margin-left: 3%;
-    margin-bottom: 3%;
-    ;
 
-
-}
 
 body {
     overflow-x: hidden;
+
     position: center;
 
 }
@@ -102,15 +94,6 @@ progress {
     background-color: lightgray;
 }
 
-progress::-webkit-progress-bar {
-    background-color: lightgray;
-    border-radius: 5px;
-}
-
-progress::-webkit-progress-value {
-    background-color: #0077ff;
-    border-radius: 5px;
-}
 
 span {
     font-size: 40px;
@@ -123,16 +106,31 @@ label {
 select {;
 }
 
+#map {
+
+    height: 85%;
+    width: 70vw;
+
+    margin-left: 0%;
+    margin-bottom: 0%;
+    margin-bottom: 0%;
+
+
+
+}
+
 .fly-to-menu {
+    position: -ms-device-fixed;
     float: right;
-    margin-top: -45%;
+    margin-top: -30%;
+    margin-bottom: -10%;
     font-size: 25px;
-    border: 4px solid black;
+
     padding: 25px;
-    background-color: ghostwhite;
-    border-radius: 10px;
-    height: 70vh;
-    width: 40vh;
+
+     width: 62.5vh;
+    height: max-content;
+
 }
 
 .menu-header {
@@ -158,31 +156,36 @@ select {;
     width: 200px;
 }
 
+.work-nappula {
+    position: -ms-device-fixed;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 25px;
+    margin-bottom: 20px;
+    margin-left: 5%;
+
+}
+
 .nappula {
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     font-size: 25px;
+
     margin-bottom: 20px;
 }
 
 input[type="submit"] {
     font-size: 50px;
 }
+
 button {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  font-size: 18px;
-  padding: 10px 20px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 18px;
+    padding: 10px 20px;
 }
 
-.work-nappula {
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 25px;
-    margin-bottom: 20px;
-}
