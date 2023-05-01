@@ -1,3 +1,11 @@
+* {
+    max-width: 100%;
+}
+
+body {
+    margin: 0;
+}
+
 #newdiv {
     margin: auto;
 }
@@ -12,14 +20,14 @@
 }
 
 .top-bar {
-    width: 102%;
+    width: 100%;
     background-color: black;
     color: white;
     padding-top: 1%;
     padding-bottom: 1%;
     margin-top: -8px;
-    margin-right: 10px;
-    margin-left: -8px;
+    /*margin-right: 10px;
+    margin-left: -8px;*/
 
 
 
@@ -47,21 +55,28 @@ body {
 }
 
 #topname {
-    width: 22%;
+    width: 17%;
     padding: 1%;
     margin: 0 0.5% 0 0.5%;
     float: left;
 }
 
 #toplocation {
-    width: 22%;
+    width: 17%;
+    padding: 1%;
+    margin: 0 0.5% 0 0.5%;
+    float: left;
+}
+
+#time {
+    width: 17%;
     padding: 1%;
     margin: 0 0.5% 0 0.5%;
     float: left;
 }
 
 .money {
-    width: 22%;
+    width: 17%;
     font-size: 40px;
     padding: 1%;
     margin: 0 0.5% 0 0.5%;
@@ -70,10 +85,10 @@ body {
 
 .profession {
     float: left;
-    width: 22%;
+    width: 17%;
     padding: 1%;
     margin: 0 0.5% 0 0.5%;
-    font-size: 50px;
+    font-size: 38px;
 }
 
 /* Progress bar styles */

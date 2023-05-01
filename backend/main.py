@@ -18,16 +18,15 @@ players = []
 
 @app.route("/player/create/<player>/<profession>")
 def creategame(player, profession):
-    #placeholder
-    if True:
-    #if profession == "Rakentaja" or profession == "Koodaaja" or profession == "Kuski":
-        start_money = 10000
+    if profession == "Rakentaja" or profession == "Koodaaja" or profession == "Kuski":
+        start_money = 1000
         start_airport = "EFHK"
+        playerTimeMax = 24
         all_airports = get_airports(connection)
 
         start_money = start_money + checkMoonPhase()
 
-        players.append(Player(create_game(connection, player, start_airport, start_money, all_airports, profession), start_airport, 24, start_money, all_airports, profession, player))
+        players.append(Player(create_game(connection, player, start_airport, start_money, all_airports, profession), start_airport, playerTimeMax, start_money, all_airports, profession, player, playerTimeMax))
         playersIndex = len(players)-1
 
         visited_country(connection, get_airport_info(connection, start_airport)["iso_country"], players[playersIndex].id)
@@ -37,6 +36,7 @@ def creategame(player, profession):
             "playerID": players[playersIndex].id,
             "playerName": players[playersIndex].name,
             "playerTime": players[playersIndex].time,
+            "playerTimeMax": players[playersIndex].timeMax,
             "playerMoney": players[playersIndex].money,
             "playerLocation": players[playersIndex].location,
             "playerProfession": players[playersIndex].profession,
@@ -55,6 +55,7 @@ def get_player(playeridx):
         "playerID": players[playeridx].id,
         "playerName": players[playeridx].name,
         "playerTime": players[playeridx].time,
+        "playerTimeMax": players[playeridx].timeMax,
         "playerMoney": players[playeridx].money,
         "playerLocation": players[playeridx].location,
         "playerProfession": players[playeridx].profession,
@@ -133,6 +134,7 @@ def work(playeridx, job):
             salary = koodaripalkka + koodaripalkka * (2*(job == players[playeridx].profession))
 
         players[playeridx].money += salary
+        players[playeridx].time -= 1
         return "success"
 
 

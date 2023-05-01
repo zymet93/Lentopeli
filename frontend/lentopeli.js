@@ -81,6 +81,7 @@ async function getmyairports() {
 function createNewGame() {
     // Delete saved cookies
     document.cookie = "fgplayercookie=;expires=Thu, 01 Jan 1970 00:00:01 GMT";
+    document.cookie = "fgworkcookie=;expires=Thu, 01 Jan 1970 00:00:01 GMT";
 
     // Call creategame() function
     fetch('/player/create/name/job')
@@ -113,8 +114,11 @@ if (document.cookie.split(";").some((item) => item.trim().startsWith("fgplayerco
         select = document.getElementById("player-money");
         select.innerHTML = res.playerMoney;
 
+        select = document.getElementById("time");
+        select.innerHTML = 'Time: ' + res.playerTime + '<progress id="player-time" max="' + res.playerTimeMax + '" value="' + res.playerTime + '">' + res.playerTime + '</progress>';
+
         select = document.getElementsByClassName("profession")[0];
-        select.innerHTML = 'Profession: ' + res.playerProfession + '<progress id="player-profession"></progress>';
+        select.innerHTML = 'Profession: ' + res.playerProfession;
     }).then(function() {
 
         // Call the function to add markers to the map
@@ -163,8 +167,11 @@ plyform.addEventListener("submit", async function(e) {
         select = document.getElementById("player-money");
         select.innerHTML = res.playerMoney;
 
+        select = document.getElementById("time");
+        select.innerHTML = 'Time: ' + res.playerTime + '<progress id="player-time" max="' + res.playerTimeMax + '" value="' + res.playerTime + '">' + res.playerTime + '</progress>';
+
         select = document.getElementsByClassName("profession")[0];
-        select.innerHTML = 'Profession: ' + res.playerProfession + '<progress id="player-profession"></progress>';
+        select.innerHTML = 'Profession: ' + res.playerProfession;
     }).then(function() {
         window.location.reload(false)
     });

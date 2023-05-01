@@ -1,10 +1,11 @@
 class Player:
     _WORK_AMOUNT = 1
 
-    def __init__(self, id, location, time, money, a_ports, profession, name):
+    def __init__(self, id, location, time, money, a_ports, profession, name, timeMax):
         self.id = id
         self.location = location
         self.time = time
+        self.timeMax = timeMax
         self.money = money
         self.profession = profession
         self.a_ports = a_ports
