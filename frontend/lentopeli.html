@@ -1,5 +1,5 @@
 <html>
-  <head>
+<head>
     <link rel="stylesheet" href="lentopeli.css">
     <script src="lentopeli.js" defer></script>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
@@ -9,76 +9,79 @@
             integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
             crossorigin=""></script>
     <title>Flight Game</title>
-  </head>
-  <body>
-    <div id="newdiv">
-      <form id="playercreator">
+</head>
+<body>
+<div id="newdiv">
+    <form id="playercreator">
         <p><span class="rlabel">Nimi</span><input type="text" id="nimimerkkikentta"></p>
         <p><span class="rlabel">Ammatti</span><select id="jobselect" name="job">
-          <option value="Rakentaja">Rakentaja</option>
-          <option value="Koodaaja">Koodaaja</option>
-          <option value="Kuski">Kuski</option>
+            <option value="Rakentaja">Rakentaja</option>
+            <option value="Koodaaja">Koodaaja</option>
+            <option value="Kuski">Kuski</option>
         </select></p>
         <input type="submit" id="playersubmit" value="Start game" style="font-size: 1.5em">
-      </form>
-    </div>
-    <div id="maindiv">
-      <div class="top-bar">
+    </form>
+</div>
+<div id="maindiv">
+    <div class="top-bar">
         <h1 class="title">Flight game</h1>
         <div id="topname">
-          <span id="player-topname"></span>
+            <span id="player-topname"></span>
         </div>
         <div id="toplocation">
-          <span id="player-toplocation"></span>
+            <span id="player-toplocation"></span>
         </div>
         <div class="money">
-          <span id="player-money">Money: $0 </span>
+            <span id="player-money">Money: $0 </span>
         </div>
         <div id="time">
-          Time: <progress id="player-time"></progress>
+            Time:
+            <progress id="player-time"></progress>
         </div>
         <div class="profession">
-          <span id="player-profession">Profession: </span>
+            <span id="player-profession">Profession: </span>
         </div>
         <div style="clear: both;"></div>
-      </div>
+    </div>
+     <div>
+         <div class="mainFrame">
+        <div id="map"></div>
 
-      <div id="map"></div>
-
-      <div class="fly-to-menu">
-        <div class="menu-header">Select a country</div>
-        <form class="country-select-form">
-          <select id="country-select" name="country">
-            <?php
-        // Code to fetch country data from database and create <option> tags goes here
-            ?>
-          </select>
-          <div class="nappula">
-            <input type="submit" value="Fly"/>
-          </div>
+        <div class="fly-to-menu">
+            <div class="menu-header">Select a country</div>
+            <form class="country-select-form">
+                <select id="country-select" name="country">
+                    <?php
+            // Code to fetch country data from database and create <option> tags goes here
+                    ?>
+                </select>
+                <div class="nappula">
+                    <input type="submit" value="Fly"/>
+              </div>
         </form>
         <div class="menu-header">
-          <form id="work-form">
-            <label class="menu-header" for="work-select">Select work:</label>
-            <select id="work-select" name="work">
+            <form id="work-form">
+                <label class="menu-header" for="work-select">Select work:</label>
+                <select id="work-select" name="work">
 
-            </select>
-            <div class="work-nappula">
-              <input type="submit" value="Work"/>
-            </div>
-          </form>
-          <script src="work.js"></script>
+                </select>
+                <div class="work-nappula">
+                    <input type="submit" value="Work"/>
+                </div>
+            </form>
+            <script src="work.js"></script>
         </div>
-      </div>
-
-      <button onclick="createNewGame()">New Game</button>
-
-
+            </div>
     </div>
 
-    <div>
-      <!-- Add your map picture here -->
+    <button onclick="createNewGame()">New Game</button>
+
+
+</div>
     </div>
-  </body>
+
+<div>
+    <!-- Add your map picture here -->
+</div>
+</body>
 </html>
-
