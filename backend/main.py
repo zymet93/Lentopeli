@@ -158,6 +158,15 @@ def geths():
     sql = "select player.p_name, player.currency from player, highscore where player.id = highscore.player order by player.currency desc limit 5"
     return jsonify(execute_sql(connection, sql))
 
+@app.route("/player/<player_id>/location")
+def get_location(player_id):
+    player_id = int(player_id)
+
+    airport_info = get_airport_info(connection, players[player_id].location)
+    return jsonify({
+        "latitude": airport_info["latitude_deg"],
+        "longitude": airport_info["longitude_deg"]
+    })
 
 if __name__ == "__main__":
     app.run(use_reloader=True, host="127.0.0.1", port=3000)
