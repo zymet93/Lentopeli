@@ -39,6 +39,7 @@ def creategame(player, profession):
             "playerTimeMax": players[playersIndex].timeMax,
             "playerMoney": players[playersIndex].money,
             "playerLocation": players[playersIndex].location,
+            "playerGoal": players[playersIndex].goal,
             "playerProfession": players[playersIndex].profession,
             "playerCanShuffleWork": players[playersIndex].canShuffleWork,
             "playerCanWorkAmount": players[playersIndex].canWorkAmt
@@ -58,6 +59,7 @@ def get_player(playeridx):
         "playerTimeMax": players[playeridx].timeMax,
         "playerMoney": players[playeridx].money,
         "playerLocation": players[playeridx].location,
+        "playerGoal": players[playeridx].goal,
         "playerProfession": players[playeridx].profession,
         "playerCanShuffleWork": players[playeridx].canShuffleWork,
         "playerCanWorkAmount": players[playeridx].canWorkAmt
@@ -113,6 +115,7 @@ def flyto(playeridx, airport):
 
         players[playeridx].resetWork()
         visited_country(connection, get_airport_info(connection, airport)["iso_country"], players[playeridx].id)
+        players[playeridx].money += players[playeridx].setGoal(connection)
         return "success"
     return "failure"
 

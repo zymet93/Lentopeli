@@ -1,3 +1,5 @@
+from functions import check_goal
+
 class Player:
     _WORK_AMOUNT = 1
 
@@ -12,7 +14,12 @@ class Player:
         self.resetWork()
         self.canShuffleWork = 1
         self.name = name
+        self.goal = 0
 
     def resetWork(self):
         self.canShuffleWork = 1
         self.canWorkAmt = self._WORK_AMOUNT
+
+    def setGoal(self, connection):
+        self.goal = check_goal(connection, self.id, self.location)
+        return self.goal

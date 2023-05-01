@@ -35,6 +35,20 @@ def get_goals(connection):
     result = cursor.fetchall()
     return result
 
+# check if airport has a goal
+def check_goal(connection, g_id, cur_airport):
+    sql = f'''SELECT ports.id, goal, goal.id as goal_id, name, money
+    FROM ports
+    JOIN goal ON goal.id = ports.goal
+    WHERE player = %s
+    AND airport = %s'''
+    cursor = connection.cursor(dictionary=True)
+    cursor.execute(sql, (g_id, cur_airport))
+    result = cursor.fetchone()
+    if result is None:
+        return 0
+    return result["money"]
+
 def create_game(connection, p_name, cur_airport, start_money, a_ports, profession):
     sql = f'''INSERT INTO player (p_name, location, currency) VALUES (%s, %s, %s)'''
     cursor = connection.cursor(dictionary=True)

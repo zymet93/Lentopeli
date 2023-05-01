@@ -129,6 +129,13 @@ if (document.cookie.split(";").some((item) => item.trim().startsWith("fgplayerco
 
         select = document.getElementsByClassName("profession")[0];
         select.innerHTML = 'Profession: ' + res.playerProfession;
+
+        if (res.playerGoal > 0) {
+            alert("Sait " + res.playerGoal + "!")
+        }
+        if (res.playerGoal < 0) {
+            alert("Sinut ryöstettiin!")
+        }
     }).then(function() {
 
         // Call the function to add markers to the map
