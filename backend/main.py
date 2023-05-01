@@ -18,7 +18,7 @@ players = []
 
 @app.route("/player/create/<player>/<profession>")
 def creategame(player, profession):
-    if profession == "Rakentaja" or profession == "Koodaaja" or profession == "Kuski":
+    if profession == "Construction" or profession == "Coding" or profession == "Driving":
         start_money = 1000
         start_airport = "EFHK"
         playerTimeMax = 24
@@ -116,6 +116,7 @@ def flyto(playeridx, airport):
         players[playeridx].resetWork()
         visited_country(connection, get_airport_info(connection, airport)["iso_country"], players[playeridx].id)
         players[playeridx].money += players[playeridx].setGoal(connection)
+        if players[playeridx].money < 0: players[playeridx].money = 0
         return "success"
     return "failure"
 
@@ -126,14 +127,14 @@ def work(playeridx, job):
 
         salary = 0
         rakentajapalkka = 1000
-        kuskipalkka = 2000
-        koodaripalkka = 3000
+        kuskipalkka = 1200
+        koodaripalkka = 1500
 
-        if job == "Rakentaja":
-            salary = rakentajapalkka + rakentajapalkka * (2*(job == players[playeridx].profession))
-        if job == "Kuski":
-            salary = kuskipalkka + kuskipalkka * (2*(job == players[playeridx].profession))
-        if job == "Koodari":
+        if job == "Construction":
+            salary = rakentajapalkka + rakentajapalkka * (2*(job == players[playeridx].profession)) - rakentajapalkka * (0.25*(players[playeridx].profession == "Coding"))
+        if job == "Driving":
+            salary = kuskipalkka + kuskipalkka * (2*(job == players[playeridx].profession)) - kuskipalkka * (0.25*(players[playeridx].profession == "Coding"))
+        if job == "Coding":
             salary = koodaripalkka + koodaripalkka * (2*(job == players[playeridx].profession))
 
         players[playeridx].money += salary

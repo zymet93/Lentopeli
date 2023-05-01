@@ -1,5 +1,5 @@
 // Define the work options array
-var workOptions = ['Koodari', 'Rakentaja', 'Kuski'];
+var workOptions = ['Coding', 'Construction', 'Driving'];
 var workNappula = document.querySelector('.work-nappula input[type="submit"]');
 
 // Get a random number between 1 and 3 for the number of work options to show

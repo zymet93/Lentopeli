@@ -122,7 +122,7 @@ if (document.cookie.split(";").some((item) => item.trim().startsWith("fgplayerco
         select.innerHTML = res.playerLocation;
 
         select = document.getElementById("player-money");
-        select.innerHTML = res.playerMoney;
+        select.innerHTML = "Money: " + res.playerMoney;
 
         select = document.getElementById("time");
         select.innerHTML = 'Time: ' + res.playerTime + '<progress id="player-time" max="' + res.playerTimeMax + '" value="' + res.playerTime + '">' + res.playerTime + '</progress>';
@@ -131,10 +131,10 @@ if (document.cookie.split(";").some((item) => item.trim().startsWith("fgplayerco
         select.innerHTML = 'Profession: ' + res.playerProfession;
 
         if (res.playerGoal > 0) {
-            alert("Sait " + res.playerGoal + "!")
+            alert("You found " + res.playerGoal + "!")
         }
         if (res.playerGoal < 0) {
-            alert("Sinut ryöstettiin!")
+            alert("You were robbed!")
         }
     }).then(function() {
 
