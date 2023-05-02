@@ -115,19 +115,25 @@ select {;
 }
 
 #map {
-
+/*
     height: 85%;
     width: 70vw;
 
     margin-left: 0%;
     margin-bottom: 0%;
     margin-bottom: 0%;
+*/
 
+    float: left;
+    height: 60%;
+    width: 60%;
+    margin: 1%;
 
 
 }
 
 .fly-to-menu {
+    /*
     position: -ms-device-fixed;
     float: right;
     margin-top: -30%;
@@ -138,6 +144,10 @@ select {;
 
      width: 62.5vh;
     height: max-content;
+*/
+    float: left;
+    width: 36%;
+    margin: 1%;
 
 }
 
