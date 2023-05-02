@@ -73,7 +73,7 @@ async function addMarkers() {
     const locationData = await locationVal.json();
 
     // Create a red popup marker at the player's location
-    const playerMarker = L.marker([locationData.latitude, locationData.longitude], {icon: L.icon({iconUrl: 'http://leafletjs.com/examples/custom-icons/leaf-red.png', iconSize: [38, 95]})}).addTo(map);
+    const playerMarker = L.marker([locationData.latitude, locationData.longitude], {icon: L.icon({iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png', iconSize: [25, 41]})}).addTo(map);
     playerMarker.bindPopup('Current Location').openPopup();
 
     const countrySelect = document.getElementById('country-select');
