@@ -1,5 +1,8 @@
 //let name = prompt("Please enter your name:");
 //let job = prompt("Please enter your job:");
+function popup() {
+  window.open('img/image.png', 'popup', 'width=600,height=400');
+}
 
 function endGame() {
     document.getElementById("newdiv").classList.add("hidden");
