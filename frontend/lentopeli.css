@@ -7,8 +7,11 @@ body {
 }
 
 #newdiv {
-    margin: auto;
-    position: fixed;
+  background-image: url("img/lentokone.jpg");
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  height: 100%;
 }
 
 .hidden {
@@ -206,4 +209,3 @@ button {
     font-size: 18px;
     padding: 10px 20px;
 }
-
