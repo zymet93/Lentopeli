@@ -88,10 +88,12 @@ def checkMoonPhase():
         y = str(date.today().strftime("%Y"))
         m = str(date.today().strftime("%m"))
         d = str(date.today().strftime("%d"))
-        if (len(response.json()["fullmoon"][y][m]) == 1 and response.json()["fullmoon"][y][m][0] == d):
+
+        fullmoon_ym = response.json()["fullmoon"][y][m]
+        if (len(fullmoon_ym) == 1 and fullmoon_ym[0] == d):
             return 10000
-        elif (len(response.json()["fullmoon"][y][m]) > 1):
-            for x in response.json()["fullmoon"][y][m]:
+        elif (len(fullmoon_ym) > 1):
+            for x in fullmoon_ym:
                 if x == d:
                     return 10000
     return 0
